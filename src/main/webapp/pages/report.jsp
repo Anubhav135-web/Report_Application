@@ -101,12 +101,9 @@
 			<!-- Links for exporting and emailing -->
 			<div>
 			    Export: 
-			    <a href="exportExcel" class="btn btn-outline-primary">Excel</a> |
-			    <a href="exportPDF" class="btn btn-outline-primary">PDF</a>
-			    <!-- New Button to Export and Send Email -->
-			    <form:form action="exportExcel" modelAttribute="search" method="POST" style="display: inline;">
-			        <button type="submit" class="btn btn-success">Send by Email</button>
-			    </form:form>
+			    <a href="Excel" class="btn btn-outline-primary">Excel</a> |
+			    <a href="pdf" class="btn btn-outline-primary">PDF</a>
+			  
 			</div>
 		</div>
 		<script

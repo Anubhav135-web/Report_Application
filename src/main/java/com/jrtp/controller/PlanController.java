@@ -27,6 +27,7 @@ import com.jrtp.service.PlanService;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class PlanController {
@@ -53,7 +54,20 @@ public class PlanController {
 		return "report";
 	}
 
-	
+	@GetMapping("/Excel")
+	public void getExcel(HttpServletResponse responce1) throws Exception {
+		responce1.setContentType("application/octet-stream");
+		responce1.addHeader("Content-Disposition","attachment;filename=plans.xls");
+		service.exportExcel(responce1);
+
+	}
+	@GetMapping("/pdf")
+	public void getPDF(HttpServletResponse responce1) throws Exception {
+		responce1.setContentType("application/pdf");
+		responce1.addHeader("Content-Disposition","attachment;filename=plans.pdf");
+		service.exportPDF(responce1);
+
+	}
 	public void init(Model model) {
 
 		model.addAttribute("planname", service.getPlanName());
