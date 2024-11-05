@@ -16,20 +16,20 @@ import lombok.Data;
 public class CitizenPlanInfo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer citizenid;
+	private Long citizenid;
 	private String citizenname;
 	private String gender;
 	private String planname;
 	private String planstatus;
 	private LocalDate planstartdate;
 	private LocalDate planenddate;
-	private int beneficialamount;
+	private Integer beneficialamount;
 	private String denialreason;
 	private String terminationreason;
-	public Integer getCitizenid() {
+	public  Long getCitizenid() {
 		return citizenid;
 	}
-	public void setCitizenid(Integer citizenid) {
+	public void setCitizenid(Long citizenid) {
 		this.citizenid = citizenid;
 	}
 	public String getCitizenname() {
@@ -68,10 +68,10 @@ public class CitizenPlanInfo {
 	public void setPlanenddate(LocalDate planenddate) {
 		this.planenddate = planenddate;
 	}
-	public int getBeneficialamount() {
+	public Integer getBeneficialamount() {
 		return beneficialamount;
 	}
-	public void setBeneficialamount(int beneficialamount) {
+	public void setBeneficialamount(Integer beneficialamount) {
 		this.beneficialamount = beneficialamount;
 	}
 	public String getDenialreason() {
@@ -87,6 +87,18 @@ public class CitizenPlanInfo {
 		this.terminationreason = terminationreason;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "CitizenPlanInfo [citizenid=" + citizenid + ", citizenname=" + citizenname + ", gender=" + gender
+				+ ", planname=" + planname + ", planstatus=" + planstatus + ", planstartdate=" + planstartdate
+				+ ", planenddate=" + planenddate + ", beneficialamount=" + beneficialamount + ", denialreason="
+				+ denialreason + ", terminationreason=" + terminationreason + ", getCitizenid()=" + getCitizenid()
+				+ ", getCitizenname()=" + getCitizenname() + ", getGender()=" + getGender() + ", getPlanname()="
+				+ getPlanname() + ", getPlanstatus()=" + getPlanstatus() + ", getPlanstartdate()=" + getPlanstartdate()
+				+ ", getPlanenddate()=" + getPlanenddate() + ", getBeneficialamount()=" + getBeneficialamount()
+				+ ", getDenialreason()=" + getDenialreason() + ", getTerminationreason()=" + getTerminationreason()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
 
 }

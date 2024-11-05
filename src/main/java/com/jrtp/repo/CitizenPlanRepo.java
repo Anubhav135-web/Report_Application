@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.jrtp.entity.CitizenPlanInfo;
 
-public interface CitizenPlanRepo extends JpaRepository<CitizenPlanInfo,Integer> {
+public interface CitizenPlanRepo extends JpaRepository<CitizenPlanInfo,Long> {
 	@Query("select distinct(planname)from CitizenPlanInfo")
 	public List<String>getPlanName();
 	@Query("select distinct(planstatus)from CitizenPlanInfo")
-	public List<String>getPlanStatus();
+     List<String>getPlanStatus();
+	
 
 }
