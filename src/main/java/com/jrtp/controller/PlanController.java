@@ -52,6 +52,7 @@ public class PlanController {
 		System.out.println("Number of plans found: " + plans.size());
 		plans.forEach(plan -> System.out.println(plan));
 		return "report";
+		
 	}
 
 	@GetMapping("/Excel")

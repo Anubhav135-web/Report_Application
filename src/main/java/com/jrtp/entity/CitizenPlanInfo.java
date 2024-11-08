@@ -1,5 +1,6 @@
 package com.jrtp.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.annotation.Generated;
@@ -13,7 +14,7 @@ import lombok.Data;
 @Entity
 @Table(name="CITIZEN_REPORT")
 @Data
-public class CitizenPlanInfo {
+public class CitizenPlanInfo implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long citizenid;
