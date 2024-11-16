@@ -7,12 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "AIT_USER_DTLS7")
+@Table(name = "AIT_USER_DTLS")
 public class UserDtlsEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Only one auto_increment column
 	private Integer userid;
+	private String username;
+	private String email;
+	private Long phone;
+	private String password;
+	private String accstatus;
+    
+	// Getters and setters
 
 	public Integer getUserid() {
 		return userid;
@@ -62,11 +69,4 @@ public class UserDtlsEntity {
 		this.accstatus = accstatus;
 	}
 
-	private String username;
-	private String email;
-	private Long phone;
-	private String password;
-	private String accstatus;
-
-	// Getters and setters
 }

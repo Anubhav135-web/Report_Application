@@ -23,8 +23,7 @@ public class StudentEnqEntity {
 	String status;
 	LocalDate createddade;
 	LocalDate updatedate;
-	@ManyToOne
-	@JoinColumn(name="userID",nullable=false)
-	UserDtlsEntity usedtls;
+	
+	//UserDtlsEntity usedtls;
 
 }

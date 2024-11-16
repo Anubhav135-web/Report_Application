@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean signUpUser(SignUpForm signupform) throws MessagingException {
-		UserDtlsEntity userdtlsentity1=userdtlsrepo.findByEmail(signupform.getemail());
-		if(userdtlsentity1!=null) {
+		UserDtlsEntity userdtlsentity1 = userdtlsrepo.findByEmail(signupform.getemail());
+		if (userdtlsentity1 != null) {
 			return false;
 		}
 		UserDtlsEntity userdtlsentity = new UserDtlsEntity();
@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
 		text.append("<br/>");
 		text.append("<a href=\"http://localhost:8080/unlock?email=" + to + "\">Click here to unlock your account</a>");
 
-		boolean sent= emailutils.sendHtmlEmail(to, subject, text.toString());
+		boolean sent = emailutils.sendHtmlEmail(to, subject, text.toString());
 		userdtlsrepo.save(userdtlsentity);
-		if(sent) {
+		if (sent) {
 			return true;
 		}
 		return false;
@@ -63,21 +63,50 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String unlockUser(UnlockForm unlockform) {
-
-		return null;
-	}
+	public boolean unlockUser(UnlockForm unlockform) {
+		UserDtlsEntity entity = userdtlsrepo.findByEmail(unlockform.getEmail());
+		if(unlockform.getTempasword().equals(entity.getPassword())) {
+			entity.setPassword(unlockform.getNewpasword());
+			entity.setAccstatus("unlocked");
+			userdtlsrepo.save(entity);
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		}
 
 	@Override
 	public String forgotPassword(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	UserDtlsEntity entity=	userdtlsrepo.findByEmail(email);
+	if(entity==null) {
+		return "Email does not exist";
 	}
-
+	else {
+		String pwd=entity.getPassword();
+		String body="Please find below password";
+		String text="Your password ::"+pwd;
+		emailutils.sendHtmlEmail(email,body,text);
+		return "success";
+	}
+	
+	
+		
+	}
+    
 	@Override
 	public String loginUser(LoginForm loginform) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDtlsEntity entity=userdtlsrepo.findByEmailAndPassword(loginform.getEmail(),loginform.getPassword());
+		
+		    if(entity==null){
+		    	return "Invalid credentials";
+		    }
+		    if(entity.getAccstatus().equalsIgnoreCase("locked")) {
+		    	return "your account locked";
+		    }
+			return "success";
+		
 	}
 
 }

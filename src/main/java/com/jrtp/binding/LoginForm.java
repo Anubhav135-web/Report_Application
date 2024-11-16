@@ -1,14 +1,16 @@
 package com.jrtp.binding;
 
-public class LoginForm {
-	String username;
+public class LoginForm{
+	
 	String password;
-	public String getUsername() {
-		return username;
+	String email;
+	public String getEmail() {
+		return email;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -17,7 +19,7 @@ public class LoginForm {
 	}
 	@Override
 	public String toString() {
-		return "LoginForm [username=" + username + ", password=" + password + "]";
+		return "LoginForm [password=" + password + ", email=" + email + "]";
 	}
 
 }

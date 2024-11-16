@@ -11,7 +11,7 @@ import jakarta.mail.MessagingException;
 public interface UserService {
 	public String loginUser(LoginForm loginform);
 	public boolean signUpUser(SignUpForm signupform) throws MessagingException;
-	public String unlockUser(UnlockForm unlockform);
+	public boolean unlockUser(UnlockForm unlockform);
 	public String forgotPassword(String email);
 
 }

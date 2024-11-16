@@ -4,6 +4,13 @@ public class UnlockForm {
 	String email;
 	String tempasword;
 	String newpasword;
+	String confirmpasword;
+	public String getConfirmpasword() {
+		return confirmpasword;
+	}
+	public void setConfirmpasword(String confirmpasword) {
+		this.confirmpasword = confirmpasword;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -24,7 +31,8 @@ public class UnlockForm {
 	}
 	@Override
 	public String toString() {
-		return "UnlockForm [email=" + email + ", tempasword=" + tempasword + ", newpasword=" + newpasword + "]";
+		return "UnlockForm [email=" + email + ", tempasword=" + tempasword + ", newpasword=" + newpasword
+				+ ", confirmpasword=" + confirmpasword + "]";
 	}
 	
 
