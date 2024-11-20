@@ -1,47 +1,55 @@
 package com.jrtp.binding;
 
 public class EnquirySearchCriteria {
-	Integer userid;
-	String course;
-	String status;
-	String mode;
+    public Integer userid;
+    public String course;
+    public String status;
+    public String mode;
+    public String studentName; // Corrected property name
 
-	public Integer getUserid() {
-		return userid;
-	}
+    // Getters and Setters
+    public String getStudentName() {
+        return studentName; // Corrected getter
+    }
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
-	}
+    public void setStudentName(String studentName) {
+        this.studentName = studentName; // Corrected setter
+    }
 
-	public String getCourse() {
-		return course;
-	}
+    public Integer getUserid() {
+        return userid;
+    }
 
-	public void setCourse(String course) {
-		this.course = course;
-	}
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getCourse() {
+        return course;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setCourse(String course) {
+        this.course = course;
+    }
 
-	public String getMode() {
-		return mode;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		return "EnquirySearchCriteria [userid=" + userid + ", course=" + course + ", status=" + status + ", mode="
-				+ mode + "]";
-	}
+    public String getMode() {
+        return mode;
+    }
 
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    @Override
+    public String toString() {
+        return "EnquirySearchCriteria [userid=" + userid + ", course=" + course + ", status=" + status + ", mode=" + mode + ", studentName=" + studentName + "]";
+    }
 }

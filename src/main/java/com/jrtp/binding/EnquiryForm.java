@@ -2,17 +2,17 @@ package com.jrtp.binding;
 
 public class EnquiryForm {
 	Integer userid;
-	
-	String studentname;
+	String studentName;
 	Long phone;
 	String mode;
 	String course;
 	String status;
-	public String getStudentname() {
-		return studentname;
+	
+	public String getStudentName() {
+		return studentName;
 	}
-	public void setStudentname(String studentname) {
-		this.studentname = studentname;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 	public Long getPhone() {
 		return phone;
@@ -46,7 +46,7 @@ public class EnquiryForm {
 	}
 	@Override
 	public String toString() {
-		return "EnquiryForm [userid=" + userid + ", studentname=" + studentname + ", phone=" + phone + ", mode=" + mode
+		return "EnquiryForm [userid=" + userid + ", studentName=" + studentName + ", phone=" + phone + ", mode=" + mode
 				+ ", course=" + course + ", status=" + status + "]";
 	}
 	

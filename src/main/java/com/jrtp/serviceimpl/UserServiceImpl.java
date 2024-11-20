@@ -17,6 +17,7 @@ import com.jrtp.utils.EmailUtils;
 import com.jrtp.utils.PwdUtils;
 
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UserService {
 	CourseRepo courserepo;
 	@Autowired
 	EmailUtils emailutils;
+	@Autowired
+	HttpSession session;
 
 	@Override
 	public boolean signUpUser(SignUpForm signupform) throws MessagingException {
@@ -105,6 +108,7 @@ public class UserServiceImpl implements UserService {
 		    if(entity.getAccstatus().equalsIgnoreCase("locked")) {
 		    	return "your account locked";
 		    }
+		    session.setAttribute("userId",entity.getUserid());
 			return "success";
 		
 	}

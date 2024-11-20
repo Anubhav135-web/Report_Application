@@ -1,5 +1,7 @@
 package com.jrtp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,35 +10,45 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.jrtp.binding.DashboardResponse;
 import com.jrtp.binding.LoginForm;
 import com.jrtp.binding.SignUpForm;
 import com.jrtp.binding.UnlockForm;
+import com.jrtp.service.EnquiryService;
 import com.jrtp.service.UserService;
 
 import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
 	@Autowired
 	UserService userservice;
+	@Autowired
+	EnquiryService enquiryservice;
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("/login")
 	public String loginPage(Model model) {
-		
-	    model.addAttribute("loginForm",new LoginForm());
+
+		model.addAttribute("loginForm", new LoginForm());
 		return "login";
 	}
+
 	@PostMapping("/login")
-	public String loginPage(@ModelAttribute("loginForm")LoginForm loginform,Model model) {
-		String status=userservice.loginUser(loginform);
-		if(status.equalsIgnoreCase("success")){
+	public String loginPage(@ModelAttribute("loginForm") LoginForm loginform, Model model) {
+		String status = userservice.loginUser(loginform);
+		
+		if (status.equalsIgnoreCase("success")) {
 			return "redirect:/dashboard";
-		}else {
+		} else {
 			model.addAttribute("errMsg", status);
 		}
 		return "login";
 	}
+
 	@GetMapping("/signup")
 	public String signUp(Model model) {
 		model.addAttribute("user", new SignUpForm());
@@ -68,40 +80,52 @@ public class UserController {
 	public String unlockHandle(@ModelAttribute("unlockformobj") UnlockForm form, Model model) {
 
 		System.out.println(form);
-		
-		if(form.getNewpasword().equals(form.getConfirmpasword())) {
-		boolean status=userservice.unlockUser(form);
-		if(status) {
-			model.addAttribute("succMsg","Account created successfully");
-		}else {
-			model.addAttribute("errMsg1", "Given Temporary pass is incorrect");
-		}
-		}
-		else {
-			model.addAttribute("errMsg","newpasword and confirm pasword not match");
+
+		if (form.getNewpasword().equals(form.getConfirmpasword())) {
+			boolean status = userservice.unlockUser(form);
+			if (status) {
+				model.addAttribute("succMsg", "Account created successfully");
+			} else {
+				model.addAttribute("errMsg1", "Given Temporary pass is incorrect");
+			}
+		} else {
+			model.addAttribute("errMsg", "newpasword and confirm pasword not match");
 		}
 		return "unlock";
 	}
 
 	@GetMapping("/dashboard")
-	public String userDashboard() {
+	public String getDashboardStats(Model model) {
+		Integer userid = (Integer) session.getAttribute("userId");
+		DashboardResponse dash = enquiryservice.getDashboard(userid);
+		model.addAttribute("dash", dash);
+
 		return "dashboard";
 	}
+
 	@GetMapping("/forgot")
 	public String forgotForm() {
 		return "forgotPwd";
 	}
+
 	@PostMapping("/forgot")
-	public String forgotPwd(@RequestParam("email") String email ,Model model){
-		String status=userservice.forgotPassword(email);
-		if(status.equalsIgnoreCase("Email does not exist")) {
+	public String forgotPwd(@RequestParam("email") String email, Model model) {
+		String status = userservice.forgotPassword(email);
+		if (status.equalsIgnoreCase("Email does not exist")) {
 			model.addAttribute("errMsg", status);
 		}
-		if(status.equalsIgnoreCase("success")) {
-			model.addAttribute("succMsg"," password sent successfully,Please check your mail");
+		if (status.equalsIgnoreCase("success")) {
+			model.addAttribute("succMsg", " password sent successfully,Please check your mail");
 		}
 		return "forgotPwd";
-		
+
+	}
+
+	@GetMapping("/logout")
+	public String logOut(String userId) {
+         //session.invalidate();
+		return "index";
+
 	}
 
 }

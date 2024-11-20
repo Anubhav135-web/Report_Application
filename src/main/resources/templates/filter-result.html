@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="table-responsive" th:fragment="table-content">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Student Name</th>
+					<th>Phone</th>
+					<th>Course</th>
+					<th>Mode</th>
+					<th>Status</th>
+					<th>Enquiry Date</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="enquiry, iterStat : ${Enquiries}">
+					<td th:text="${iterStat.index + 1}"></td>
+					<td th:text="${enquiry.studentName}"></td>
+					<td th:text="${enquiry.phone}"></td>
+					<td th:text="${enquiry.course}"></td>
+					<td th:text="${enquiry.mode}"></td>
+					<td th:text="${enquiry.status}"></td>
+					<td
+						th:text="${#temporals.format(enquiry.createdDate, 'yyyy-MM-dd')}"></td>
+						<td><a th:href="@{/edit-enquiry(id=${enquiry.enquiryId})}"
+							class="btn btn-primary btn-sm">Edit</a> <a
+							th:href="@{/delete-enquiry(id=${enquiry.enquiryId})}"
+							class="btn btn-danger btn-sm"
+							onclick="return confirm('Are you sure you want to delete this enquiry?');">Delete</a>
+						</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(Enquiries)}">
+					<td colspan="7" class="text-center">No enquiries found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

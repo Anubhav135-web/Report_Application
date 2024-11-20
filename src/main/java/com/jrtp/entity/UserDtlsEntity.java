@@ -1,9 +1,15 @@
 package com.jrtp.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,8 +24,11 @@ public class UserDtlsEntity {
 	private Long phone;
 	private String password;
 	private String accstatus;
-    
+	@OneToMany(mappedBy="userdtlsentity" ,cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    private List<StudentEnqEntity>enquiries;
 	// Getters and setters
+
+	
 
 	public Integer getUserid() {
 		return userid;
@@ -67,6 +76,13 @@ public class UserDtlsEntity {
 
 	public void setAccstatus(String accstatus) {
 		this.accstatus = accstatus;
+	}
+	public List<StudentEnqEntity> getEnquiries() {
+		return enquiries;
+	}
+
+	public void setEnquiries(List<StudentEnqEntity> enquiries) {
+		this.enquiries = enquiries;
 	}
 
 }
